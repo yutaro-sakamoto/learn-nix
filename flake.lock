@@ -1,0 +1,22 @@
+{
+  "nodes": {
+    "root": {
+      "inputs": {
+        "sub_flake": "sub_flake"
+      }
+    },
+    "sub_flake": {
+      "locked": {
+        "path": "./sub",
+        "type": "path"
+      },
+      "original": {
+        "path": "./sub",
+        "type": "path"
+      },
+      "parent": []
+    }
+  },
+  "root": "root",
+  "version": 7
+}
