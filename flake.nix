@@ -1,9 +1,8 @@
 {
     inputs = {
-        sub_flake.url = "path:./sub";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
 
-    outputs = {sub_flake, ...}: {
-        sum_1_2 = sub_flake.add_a_b 1 2;
+    outputs = _: {
     };
 }
