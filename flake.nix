@@ -3,6 +3,16 @@
         nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
 
-    outputs = _: {
-    };
+    outputs =
+        { nixpkgs, ... }:
+        let
+            system = "x86_64-linux";
+            pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+            packages.${system} = {
+                hello = pkgs.hello;
+            };
+        };
+
 }
