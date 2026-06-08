@@ -12,8 +12,11 @@
                 pkgs = nixpkgs.legacyPackages.${system};
             in
             {
-                devShells.default = pkgs.mkShell {
-                    packages = [ pkgs.cowsay ];
+                packages.default = pkgs.mkShell {
+                    packages = with pkgs; [
+                        nodejs_20
+                        corepack
+                    ];
                 };
             }
         );
