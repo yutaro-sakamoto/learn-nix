@@ -6,23 +6,19 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      flake-utils,
-      nur,
-      ...
-    }:
+    { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        # `nur.overlays.<overlayの名前>`ではなく`nur.overlay`
-        # `outputs.overlay`は現在非推奨だが恐らく後方互換性のために残されている
-        overlays = [ nur.overlay ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       {
         packages = {
-          default = pkgs.nur.repos.mic92.hello-nur;
+          hello = pkgs.stdenv.mkDerivation {
+            pname = "hello";
+            version = "2.12";
+              src = ./hello-2.12.tar.gz;
+          };
         };
       }
     );
