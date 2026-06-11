@@ -17,7 +17,12 @@
           hello = pkgs.stdenv.mkDerivation {
             pname = "hello";
             version = "2.12";
-              src = ./hello-2.12.tar.gz;
+            nativeBuildInputs = with pkgs; [ wget ];
+            unpackPhase = ''
+             wget https://ftp.gnu.org/gnu/hello/hello-2.12.tar.gz
+             tar -xvf hello-2.12.tar.gz
+             cd hello-2.12
+            '';
           };
         };
       }
