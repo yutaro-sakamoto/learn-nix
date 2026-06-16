@@ -2,11 +2,19 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    nur.url = "github:nix-community/NUR";
+    gnu-hello-src = {
+      url = "https://ftp.gnu.org/gnu/hello/hello-2.12.tar.gz";
+      flake = false;
+    };
   };
 
   outputs =
-    { nixpkgs, flake-utils, ... }:
+    {
+      nixpkgs,
+      flake-utils,
+      gnu-hello-src,
+      ...
+    }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -15,15 +23,9 @@
       {
         packages = {
           hello = pkgs.stdenv.mkDerivation {
-            name = "hello";
-            src = ./hello-2.12.tar.gz;
-            buildPhase = ''
-              make
-            '';
-            installPhase = ''
-              mkdir -p $out/bin
-              cp hello $out/bin
-            '';
+            pname = "hello";
+            version = "2.12";
+            src = gnu-hello-src;
           };
         };
       }
