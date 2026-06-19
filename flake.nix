@@ -14,11 +14,24 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        hello = pkgs.stdenv.mkDerivation {
+          pname = "hello";
+          version = "0.0.1";
+          src = ./src;
+          nativeBuildInputs = with pkgs; [ rustc ];
+          buildPhase = ''
+            rustc ./hello.rs
+          '';
+          installPhase = ''
+            mkdir -p $out/bin
+            cp ./hello $out/bin/hello
+          '';
+        };
       in
       {
         packages = {
-          hello = pkgs.hello;
-          default = pkgs.hello;
+          inherit hello;
+          default = hello;
         };
       }
     );
