@@ -19,6 +19,7 @@
         packages = {
           hello = pkgs.callPackage ./nix/hello.nix { };
           default = pkgs.callPackage ./nix/hello.nix { };
+          packages.default = pkgs.callPackage ./nix/rust-with-nix.nix { };
         };
       }
     );
