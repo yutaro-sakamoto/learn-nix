@@ -1,9 +1,10 @@
 {
-  description = "hello package written in Rust";
+  description = "opensource COBOL 4J package";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+
   };
 
   outputs =
@@ -17,9 +18,8 @@
       in
       {
         packages = {
-          hello = pkgs.callPackage ./nix/hello.nix { };
-          default = pkgs.callPackage ./nix/hello.nix { };
-          packages.default = pkgs.callPackage ./nix/rust-with-nix.nix { };
+          hello = pkgs.callPackage ./cobol/oc4j.nix { } ;
+          default =  pkgs.callPackage ./cobol/oc4j.nix { } ;
         };
       }
     );
