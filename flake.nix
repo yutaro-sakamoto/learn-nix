@@ -16,10 +16,13 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
+      let
+        libcobj = pkgs.callPackage ./cobol/libcobj.nix { };
+      in
       {
         packages = {
-          hello = pkgs.callPackage ./cobol/oc4j.nix { } ;
-          default =  pkgs.callPackage ./cobol/oc4j.nix { } ;
+          inherit libcobj;
+          default = pkgs.callPackage ./cobol/oc4j.nix { inherit libcobj; };
         };
       }
     );
